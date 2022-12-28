@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Chat with {{ message }} {% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5" style="width: 50%; margin: auto; background: seashell;">
+        {{ message }}
+        <form action="{{ transmitterID }}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                {% for line in chat %}
+                    {% if recieverID == line.recieverID %}
+                        <h5 class="text-end" style="color: green;">{{ line.content }}</h5>
+                    {% else %}
+                        <h5 style="color: red;">{{ line.content }}</h5>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="input-group mt-3 mb-3">
+                <input type="text" class="form-control" placeholder="Type here..." name="content" required>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Send</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

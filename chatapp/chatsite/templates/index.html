@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Index {% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <div class="container mt-5 text-center">
+            {% for chat in chats %}
+            <div>
+                <a href="{% url 'chat' chat.userID %}">{{ chat.username }}</a>
+            </div>
+            {% endfor %}
+        </div>    
+    {% else %}
+        <div class="container mt-5 text-center">
+            {{ message }}
+        </div>
+    {% endif %}
+
+{% endblock %}
